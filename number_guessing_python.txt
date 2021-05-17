@@ -1,0 +1,50 @@
+from tkinter import *
+import random
+import os
+root=Tk()
+root.title("Number guessing game")
+root.geometry('500x500+80+80')
+class NumberGuessing:
+    num1=IntVar() # it stores values
+    num2=IntVar()
+    guessednumber=IntVar()
+    value=None
+    def check(self):
+
+        
+        if self.num1.get()==0 or self.num2.get()==0 or self.guessednumber.get()==0:
+            self.ResultLabel.configure(text="Plz input all the fields")
+        else:
+            self.value=random.randint(self.num1.get(),self.num2.get())
+            if self.guessednumber.get()==self.value:
+                self.ResultLabel.configure(text=" WOW,YOU ARE RIGHT ,YOU WON THE GAME")
+            else:
+                self.ResultLabel.configure(text=f'Oops the number is {self.value}')
+
+    def __init__(self):
+
+         #Creating entry boxes
+        self.font1=('Algerian',18)
+        self.Label1=Label(root, text="FROM",font=self.font1,foreground="red")
+        self.Label1.grid(row=0,column=0,sticky=W,padx=5,pady=5)
+        self.entry1=Entry(root, textvariable=self.num1,font=self.font1,foreground="blue")
+        self.entry1.grid(row=0,column=1,padx=5,pady=5)
+        
+        self.Label2=Label(root, text="TO",font=self.font1,foreground="red")
+        self.Label2.grid(row=1,column=0,sticky=W,padx=5,pady=5)
+        self.entry2=Entry(root, textvariable=self.num2,font=self.font1,foreground="blue")
+        self.entry2.grid(row=1,column=1,padx=5,pady=5)
+        
+        self.Label3=Label(root,text="GUESS ANY NUMBER",font=self.font1,foreground="darkviolet")
+        self.Label3.grid(row=2,columnspan=2,pady=10)
+        self.entry3=Entry(root,textvariable=self.guessednumber,font=self.font1,foreground="darkorchid")
+        self.entry3.grid(row=3,columnspan=2,pady=10)
+        
+        self.btn=Button(root,text="check",font=self.font1,foreground="violet",command=self.check)
+        self.btn.grid(row=4,columnspan=2,pady=10)
+
+        self.ResultLabel=Label(root,text="RESULT",font=self.font1,foreground="magenta")
+        self.ResultLabel.grid(row=5,columnspan=2,pady=10)
+        root.mainloop()
+
+a=NumberGuessing()
